@@ -27,7 +27,7 @@ public class Partido extends JPanel implements ActionListener {
     private Formacion formation;
     private Jugador[] jugador;
     private Portero portero;
-  
+    private Defensa[] defensa;
     private int time;
     protected int secuencia;
     private Timer timer;
@@ -44,9 +44,28 @@ public class Partido extends JPanel implements ActionListener {
 
     public void portero(Graphics g) {
         this.portero = new Portero("Ospina", 10, 20, 310);
-        g.drawImage(Muñeco, portero.getMovX() + portero.getX(),portero.getMovY() + portero.getY(), portero.getX() + 60, portero.getMovY()+portero.getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60 , this);
+        g.drawImage(Muñeco, portero.getMovX() + portero.getX(), portero.getMovY() + portero.getY(), portero.getX() + 60, portero.getMovY() + portero.getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
 
     }
+
+    public void Defensa(Graphics g) {
+        this.defensa = new Defensa[4];
+        defensa[0] = new Defensa("Pique", 4, 200, 100);
+        defensa[1] = new Defensa("Boateng", 2, 200, 250);
+        defensa[2] = new Defensa("Messi", 4, 200, 400);
+        defensa[3] = new Defensa("Robayo", 4, 200, 550);
+
+        for (int i = 0; i < defensa.length; i++) {
+            g.drawImage(Muñeco, defensa[i].getMovX() + defensa[i].getX(), defensa[i].getMovY() + defensa[i].getY(), defensa[i].getX() + 60, defensa[i].getMovY() + defensa[i].getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
+
+        }
+    }
+
+    public void Mediocampista(Graphics g) {
+
+    }
+
+
 
     public void formaciones(Graphics g) {
         this.jugador = new Jugador[11];
@@ -75,7 +94,8 @@ public class Partido extends JPanel implements ActionListener {
         Graphics gbd = db.getGraphics();
         gbd.drawImage(Cancha, 0, 0, this);
         portero(gbd);
-        formaciones(gbd);
+        Defensa(gbd);
+        // formaciones(gbd);
         g.drawImage(db, 0, 0, this);
 
     }
@@ -88,13 +108,13 @@ public class Partido extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-/* for (int i = 0; i < jugador.length; i++) {
+        /* for (int i = 0; i < jugador.length; i++) {
             jugador[i].setMovX(+50);
             /* x[i] += 50;
             x[i] = jugador[i].getMovX();
 
         }*/
-       
+
         portero.setMovY(20);
         if (this.secuencia == 2) {
 
