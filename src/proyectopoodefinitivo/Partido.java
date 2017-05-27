@@ -7,8 +7,11 @@ package proyectopoodefinitivo;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,62 +31,78 @@ public class Partido extends JPanel implements ActionListener {
     private Jugador[] jugador;
     private Portero portero;
     private Defensa[] defensa;
-    private int time;
+    private Mediocampista[] medio;
+    private Delantero[] delantero;
+    
     protected int secuencia;
     private Timer timer;
-    private int x;
-    private int yyy;
     private Image Muñeco;
 
     public Partido() {
+
         this.Muñeco = cargarimagen("received_10212987967997600.png");
+        this.portero = new Portero("Ospina", 10, 20, 310);
+        this.defensa = new Defensa[4];
+        this.medio = new Mediocampista[4];
+        this.delantero= new Delantero[2];
+        
+        defensa[0] = new Defensa("Pique", 22, 200, 100);
+        defensa[1] = new Defensa("Boateng", 2, 200, 250);
+        defensa[2] = new Defensa("Messi", 11, 200, 400);
+        defensa[3] = new Defensa("Robayo", 22, 200, 550);
+        
+        medio[0] = new Mediocampista("Xabi", 12, 500, 100);
+        medio[1] = new Mediocampista("Gerrard", 8, 500, 250);
+        medio[2] = new Mediocampista("Ribery", 5, 500, 400);
+        medio[3] = new Mediocampista("Rakitic", 6, 500, 550);
+        
+        delantero[0] = new Delantero("Messi", 10, 700, 150);
+        delantero[1] = new Delantero("Cristiano", 7, 700,500);
+
+        addKeyListener(new TAdapter());
+        setFocusable(true);
         timer = new Timer(80, this);
         timer.start();
 
     }
 
     public void portero(Graphics g) {
-        this.portero = new Portero("Ospina", 10, 20, 310);
         g.drawImage(Muñeco, portero.getMovX() + portero.getX(), portero.getMovY() + portero.getY(), portero.getX() + 60, portero.getMovY() + portero.getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
-
+        //Rectangle a = portero.getBounds();//esto es lo de colisiones, esta linea no hace nada
+        g.drawRect(portero.getX()+4, portero.getY()+4, 48, 50);
+        
     }
 
     public void Defensa(Graphics g) {
-        this.defensa = new Defensa[4];
-        defensa[0] = new Defensa("Pique", 4, 200, 100);
+
+        defensa[0] = new Defensa("Pique", 22, 200, 100);
         defensa[1] = new Defensa("Boateng", 2, 200, 250);
-        defensa[2] = new Defensa("Messi", 4, 200, 400);
-        defensa[3] = new Defensa("Robayo", 4, 200, 550);
+        defensa[2] = new Defensa("Messi", 11, 200, 400);
+        defensa[3] = new Defensa("Robayo", 22, 200, 550);
 
         for (int i = 0; i < defensa.length; i++) {
             g.drawImage(Muñeco, defensa[i].getMovX() + defensa[i].getX(), defensa[i].getMovY() + defensa[i].getY(), defensa[i].getX() + 60, defensa[i].getMovY() + defensa[i].getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
-
+            g.drawRect(defensa[i].getX()+4, defensa[i].getY()+4, 48, 50);
         }
     }
 
     public void Mediocampista(Graphics g) {
-
+        medio[0] = new Mediocampista("Xabi", 12, 500, 100);
+        medio[1] = new Mediocampista("Gerrard", 8, 500, 250);
+        medio[2] = new Mediocampista("Ribery", 5, 500, 400);
+        medio[3] = new Mediocampista("Rakitic", 6, 500, 550);
+        for (int i = 0; i < medio.length; i++) {
+            g.drawImage(Muñeco, medio[i].getMovX() + medio[i].getX(), medio[i].getMovY() + medio[i].getY(), medio[i].getX() + 60, medio[i].getMovY() + medio[i].getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
+            g.drawRect(medio[i].getX()+4, medio[i].getY()+4, 48, 50);
+        }
     }
 
-
-
-    public void formaciones(Graphics g) {
-        this.jugador = new Jugador[11];
-        jugador[0] = new Jugador("James", 10, 0, 0);
-        jugador[1] = new Jugador("James", 10, 60, 60);
-        jugador[2] = new Jugador("James", 10, 120, 120);
-        jugador[3] = new Jugador("James", 10, 180, 180);
-        jugador[4] = new Jugador("James", 10, 240, 240);
-        jugador[5] = new Jugador("James", 10, 300, 300);
-        jugador[6] = new Jugador("James", 10, 360, 360);
-        jugador[7] = new Jugador("James", 10, 420, 420);
-        jugador[8] = new Jugador("James", 10, 480, 480);
-        jugador[9] = new Jugador("James", 10, 540, 540);
-        jugador[10] = new Jugador("James", 10, 600, 600);
-
-        for (int i = 0; i < jugador.length; i++) {
-            g.drawImage(Muñeco, jugador[i].getMovX() + jugador[i].getX(), jugador[i].getY(), jugador[i].getX() + 60, jugador[i].getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
-
+    public void Delanteros(Graphics g) {
+        delantero[0] = new Delantero("Messi", 10, 700, 150);
+        delantero[1] = new Delantero("Cristiano", 7, 700,500);
+         for (int i = 0; i < delantero.length; i++) {
+            g.drawImage(Muñeco, delantero[i].getMovX() + delantero[i].getX(), delantero[i].getMovY() +delantero[i].getY(), delantero[i].getX() + 60, delantero[i].getMovY() + delantero[i].getY() + 60, (this.secuencia * 60), 0, (this.secuencia * 60) + 60, 60, this);
+            g.drawRect(delantero[i].getX()+4, delantero[i].getY()+4, 48, 50);
         }
     }
 
@@ -95,9 +114,9 @@ public class Partido extends JPanel implements ActionListener {
         gbd.drawImage(Cancha, 0, 0, this);
         portero(gbd);
         Defensa(gbd);
-        // formaciones(gbd);
+        Mediocampista(gbd);
+        Delanteros(gbd);
         g.drawImage(db, 0, 0, this);
-
     }
 
     public Image cargarimagen(String imagen) {
@@ -108,22 +127,38 @@ public class Partido extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /* for (int i = 0; i < jugador.length; i++) {
-            jugador[i].setMovX(+50);
-            /* x[i] += 50;
-            x[i] = jugador[i].getMovX();
-
-        }*/
-
-        portero.setMovY(20);
+        portero.mover();
+        checkCollisions();
+        
         if (this.secuencia == 2) {
-
             this.secuencia = 0;
         } else {
             this.secuencia++;
-
         }
+        
         repaint();
+    }
+    
+    private class TAdapter extends KeyAdapter {
+        @Override
+        public void keyReleased(KeyEvent e) {
+            portero.keyReleased(e);
+            //System.out.println("Solto la tecla ejecucion partido");
+        }
 
+        @Override
+        public void keyPressed(KeyEvent e) {
+            portero.keyPressed(e);
+            //System.out.println("Ejecucion partido tecla presionada");
+        }
+    }
+    
+    public void checkCollisions(){
+        Rectangle rArquero = portero.getBounds();
+        Rectangle rDefensa1 = defensa[0].getBounds();
+        if(rArquero.intersects(rDefensa1)){
+            timer.stop();
+            System.out.println("Colision");
+        }
     }
 }

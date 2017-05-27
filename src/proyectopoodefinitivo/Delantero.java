@@ -15,6 +15,14 @@ public class Delantero extends Jugador {
         super(Nombre, Numero, x, y);
     }
 
+
+    public void mover() {
+        x=getX();
+        y=getY();
+        x+=dx;
+        y+=dy;
+    }
+
     
     
 }

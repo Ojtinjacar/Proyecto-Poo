@@ -5,15 +5,11 @@
  */
 package proyectopoodefinitivo;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
+import java.awt.Rectangle;
 
 /**
  *
- * @author oscar
+ * @author oscar jose y camilo
  */
 public class Jugador {
 
@@ -21,22 +17,23 @@ public class Jugador {
     protected String Nombre;
     //Número 
     protected int Numero;
- //Posición Jugador en X
+    //Posición Jugador en X
     protected int x;
     //Posición Jugador en Y
     protected int y;
     //Mov en x
-    protected int MovX;
-    //Mov en y
-    protected int MovY;
+    protected int dx;
+    //Mov en y  
+    protected int dy;
     //SEcuencia
+    protected int width;
+    protected int height;
 
     public Jugador(String Nombre, int Numero, int x, int y) {
         this.Nombre = Nombre;
         this.Numero = Numero;
         this.x = x;
         this.y = y;
-
     }
 
     public String getNombre() {
@@ -72,20 +69,39 @@ public class Jugador {
     }
 
     public int getMovX() {
-        return MovX;
+        return dx;
     }
 
-    public void setMovX(int MovX) {
-        this.MovX = MovX;
+    public void setMovX(int dx) {
+        this.dx = dx;
     }
 
     public int getMovY() {
-        return MovY;
+        return dy;
     }
 
-    public void setMovY(int MovY) {
-        this.MovY = MovY;
+    public void setMovY(int dy) {
+        this.dy = dy;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    public Rectangle getBounds(){
+        return new Rectangle(x ,y, width, height);
+    }
 
 }

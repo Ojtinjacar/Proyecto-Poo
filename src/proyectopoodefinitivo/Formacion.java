@@ -25,7 +25,6 @@ public class Formacion {
 
     public Formacion() {
 
-        this.portero = new Portero("Ospina", 1, 15, 300);
 
     }
 

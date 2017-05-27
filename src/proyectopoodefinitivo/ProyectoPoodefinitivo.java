@@ -20,12 +20,13 @@ public class ProyectoPoodefinitivo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JFrame Frame = new JFrame("Fifa");
-          Partido cotejo = new Partido();
+        JFrame Frame = new JFrame("Fifa20");
+        Partido cotejo = new Partido();
         Frame.add(cotejo);
         
         Frame.setSize(1050, 730);
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Frame.setResizable(false);
         Frame.setLocationRelativeTo(null);
         Frame.setVisible(true);
         Frame.setLayout(null);

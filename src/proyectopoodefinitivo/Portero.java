@@ -5,6 +5,7 @@
  */
 package proyectopoodefinitivo;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 /**
@@ -15,7 +16,7 @@ public class Portero extends Jugador {
 
     public Portero(String Nombre, int Numero, int x, int y) {
         super(Nombre, Numero, x, y);
-   
+
     }
 
     public void mover() {
@@ -23,7 +24,6 @@ public class Portero extends Jugador {
         y = getY();
         x += dx;
         y += dy;
-      
 
     }
 
@@ -44,14 +44,11 @@ public class Portero extends Jugador {
     }
 
     public void keyReleased(KeyEvent e) {
-        System.out.println("Solto la tecla ejecucion defensa");
+        System.out.println("Solto la tecla ejecucion portero");
         int key = e.getKeyCode();
+
         if (key == KeyEvent.VK_LEFT) {
-            x = getX();
-            dx -= 10;
-            if (dx != x) {
-                //  dx=100;
-            }
+            dx = 0;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
@@ -65,6 +62,10 @@ public class Portero extends Jugador {
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
         }
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(getX(), getY(), 60, 60);
     }
 
 }
